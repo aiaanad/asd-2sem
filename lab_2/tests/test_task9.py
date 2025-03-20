@@ -34,11 +34,15 @@ class TestDelSubTree(unittest.TestCase):
         expected_memory = 256
         n, m = 2*10**5, 2*10**5
         rel = []
+        key_variable = list(range(10**9, 10**9 - 2*10**5 - 1, -1))
         for i in range(1, n + 1):
             left = 2 * i if 2 * i <= n else 0
             right = 2 * i + 1 if 2 * i + 1 <= n else 0
+            key = random.choice(key_variable)
+            key_variable.pop(key_variable.index(key))
             rel.append((i, left, right))
-        nodes = random.sample(range(1, 2*10**5+1), 2*10**5)
+        nodes = random.sample(range(1, 2*10**5 + 1), 2*10**5)
+
         # when
         start_time = time.perf_counter()
         delSubTree(n, rel, m, nodes)
