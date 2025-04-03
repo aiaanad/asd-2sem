@@ -1,5 +1,4 @@
 import unittest
-import random
 import time
 import tracemalloc
 from lab_3.src.task12 import colorLabyrinth
@@ -10,8 +9,17 @@ class TestColorLabyrinth(unittest.TestCase):
         self.n = 10**5
         self.m = 10**5
         self.k = 10**5
-        self.colors = [random.choice(range(1, 101)) for _ in range(self.k)]
-        self.edges = [[i+1, i+2, random.choice(range(1, 101))] for i in range(self.m)]
+        self.edges = []
+        # Создаем максимальное количество коридоров между комнатами
+        # с разными цветами (цвета от 1 до 100)
+        for i in range(1, self.m + 1):
+            u = (i % self.n) + 1  # равномерно распределяем по комнатам
+            v = ((i + 1) % self.n) + 1  # следующая комната
+            c = (i % 100) + 1  # цвет от 1 до 100
+            self.edges.append([u, v, c])
+
+        # Генерируем максимальное описание пути (цвета от 1 до 100)
+        self.colors = [(i % 100) + 1 for i in range(self.k)]
 
     def test_func_with_max_args(self):
         expected_time = 1

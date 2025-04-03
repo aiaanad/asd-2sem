@@ -4,9 +4,10 @@ from collections import defaultdict
 def colorLabyrinth(n, m, edges, k, colors):
     graph = defaultdict(defaultdict)
     for u, v, c in edges:
+        if c in graph[u] or c in graph[v]:
+            raise ValueError('Не уникальные коридоры')
         graph[u][c] = v
         graph[v][c] = u
-
     cur_v = 1
     for color in colors:
         if color in graph[cur_v].keys():
