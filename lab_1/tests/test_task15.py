@@ -29,6 +29,9 @@ class TestDelSeq(unittest.TestCase):
         self.assertLessEqual(result_time, expected_time, f"Значение {result_time} превышает порог {expected_time}")
         self.assertLessEqual(memory, expected_memory, f"Значение {memory} превышает порог {expected_memory}")
 
+    def tearDown(self):
+        del self.s
+
 
 if __name__ == "__main__":
     unittest.main()
